@@ -1,0 +1,57 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
+  },
+  "runtimeOptions": {
+    "gcServer": true
+  },
+  "tooling": {
+    "defaultNamespace": "Dashboard"
+  },
+
+	"dependencies": {
+		"Microsoft.NETCore.App": {
+			"version": "1.0.0-rc2-*",
+			"type": "platform"
+		},
+		"Microsoft.AspNetCore.Diagnostics": "1.0.0-*",
+		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-*",
+		"Microsoft.AspNetCore.Mvc": "1.0.0-*",
+		"Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0-*",
+		"Microsoft.AspNetCore.Server.Kestrel": "1.0.0-*",
+		"Microsoft.AspNetCore.StaticFiles": "1.0.0-*",
+		"Microsoft.Extensions.Configuration.Json": "1.0.0-*",
+		"Microsoft.Extensions.Logging.Console": "1.0.0-*",
+		"Microsoft.NETCore.Platforms": "1.0.1-*",
+		"Microsoft.Extensions.Logging.Debug": "1.0.0-*",
+		"Microsoft.AspNetCore.AngularServices": "1.0.0-*",
+		"Microsoft.AspNetCore.SpaServices": "1.0.0-beta-000004"
+	},
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "dnxcore50",
+        "portable-net45+win8"
+      ]
+    }
+  },
+  "publishOptions": {
+    "exclude": [
+      "node_modules",
+      "**.xproj",
+      "**.user",
+      "**.vspscc"
+    ]
+  },
+  "scripts": {
+    "prepare": [
+      "npm install",
+      "webpack --config webpack.config.vendor.js"
+    ],
+    "prepublish": [ "webpack" ],
+    "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  }
+}
